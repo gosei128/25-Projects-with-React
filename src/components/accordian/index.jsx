@@ -1,29 +1,27 @@
 import { useState } from "react";
 import data from "./data";
 import "./style.css";
-
 const Accordian = () => {
-  const [selected, setSeleted] = useState(null);
-  const [enableMultiSelection, setEnableMultiSelection] = useState(false);
+  const [selected, setSelected] = useState(null);
+  const [enableMulti, setEnableMulti] = useState(false);
   const [multiple, setMultiple] = useState([]);
 
   const handleSingleSelection = (getCurrentId) => {
-    setSeleted(getCurrentId === selected ? null : getCurrentId);
+    setSelected(getCurrentId === selected ? null : getCurrentId);
   };
-  const handleMultiSelection = (getCurrentId) => {
-    let cpyMultiple = [...multiple];
-    const findIndexOf = cpyMultiple.indexOf(getCurrentId);
+  const handleMultipleSelection = (getCurrentId) => {
+    let cpyMultple = [...multiple];
+    const findIndexOf = cpyMultple.indexOf(getCurrentId);
 
-    console.log(findIndexOf);
-    if (findIndexOf === -1) cpyMultiple.push(getCurrentId);
-    else cpyMultiple.splice(findIndexOf, 1);
+    if (findIndexOf === -1) cpyMultple.push(getCurrentId);
+    else cpyMultple.splice(findIndexOf, 1);
 
-    setMultiple(cpyMultiple);
+    setMultiple(cpyMultple);
   };
   console.log(selected, multiple);
   return (
     <div className="wrapper">
-      <button onClick={() => setEnableMultiSelection(!enableMultiSelection)}>
+      <button onClick={() => setEnableMulti(!enableMulti)}>
         Enable Multi Selection
       </button>
       <div className="accordian">
@@ -33,25 +31,25 @@ const Accordian = () => {
               <div
                 className="title"
                 onClick={() =>
-                  enableMultiSelection
-                    ? handleMultiSelection(dataItem.id)
+                  enableMulti
+                    ? handleMultipleSelection(dataItem.id)
                     : handleSingleSelection(dataItem.id)
                 }
               >
                 <h3>{dataItem.question}</h3>
                 <span>+</span>
               </div>
-              {enableMultiSelection ? (
+              {enableMulti ? (
                 multiple.indexOf(dataItem.id) !== -1 && (
-                  <div className="content">{dataItem.answer}</div>
+                  <div className="content">{dataItem.answer} </div>
                 )
               ) : selected === dataItem.id ? (
-                <div className="content">{dataItem.answer}</div>
+                <div className="content">{dataItem.answer} </div>
               ) : null}
             </div>
           ))
         ) : (
-          <div>No data Found ! </div>
+          <div> Data Not Found </div>
         )}
       </div>
     </div>
