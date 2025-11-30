@@ -1,43 +1,43 @@
 import { useEffect, useState } from "react";
 import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from "react-icons/bs";
 import "./style.css";
-const ImageSlider = ({ url, limit = 5, page = 1 }) => {
+const ImageSlider = ({ url, page, limit }) => {
   const [images, setImages] = useState([]);
-  const [currectSlide, setCurrentSlide] = useState(0);
-  const [err, setErr] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handlePrevious = () => {
-    setCurrentSlide(currectSlide === 0 ? images.length - 1 : currectSlide - 1);
+    setCurrentSlide(currentSlide === 0 ? images.length - 1 : currentSlide - 1);
   };
   const handleNext = () => {
-    setCurrentSlide(currectSlide === images.length - 1 ? 0 : currectSlide + 1);
+    setCurrentSlide(currentSlide === images.length - 1 ? 0 : currentSlide + 1);
   };
 
   async function fetchImage(getUrl) {
     try {
-      setLoading(true);
-      const res = await fetch(`${getUrl}?page=${page}&limit=${limit}`);
-      const data = await res.json();
+      const response = await fetch(`${getUrl}?page=${page}&limit=${limit}`);
+      const data = await response.json();
+      console.log(data);
+      setIsLoading(true);
 
       if (data) {
         setImages(data);
-        setLoading(false);
+        setIsLoading(false);
       }
-    } catch (e) {
-      setErr(e.message);
-      setLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      setError(error.message);
     }
   }
 
   useEffect(() => {
     if (url !== "") fetchImage(url);
   }, [url]);
-  console.log(images);
-  if (loading) {
+  if (isLoading) {
     return <div>Loading data...</div>;
   }
-  if (err !== null) {
+  if (error !== null) {
     return <div>Error Occured</div>;
   }
   return (
@@ -50,10 +50,10 @@ const ImageSlider = ({ url, limit = 5, page = 1 }) => {
         ? images.map((imageItem, index) => (
             <img
               key={imageItem.id}
-              alt={imageItem.download_url}
               src={imageItem.download_url}
+              alt={imageItem.download_url}
               className={
-                currectSlide === index
+                currentSlide === index
                   ? "current-image"
                   : "current-image hide-current-image"
               }
@@ -70,9 +70,9 @@ const ImageSlider = ({ url, limit = 5, page = 1 }) => {
               <button
                 key={index}
                 className={
-                  currectSlide === index
-                    ? "current-inidcator"
-                    : "current-indicator hide-current-indicator"
+                  currentSlide === index
+                    ? "current-indicator"
+                    : "current-indicator inactive-indicator"
                 }
                 onClick={() => setCurrentSlide(index)}
               ></button>

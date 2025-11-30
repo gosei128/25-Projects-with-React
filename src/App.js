@@ -4,6 +4,7 @@ import Accordian from './components/accordian';
 import RandomColor from './components/Random-Color';
 import StarRating from './components/star-rating';
 import ImageSlider from './components/image-slider';
+import LoadMore from './components/load-more-data';
 
 function App() {
   return (
@@ -16,7 +17,9 @@ function App() {
       {/* Star Rating */}
       {/* <StarRating noOfStar={5}/> */}
       {/* Image Slider */}
-      <ImageSlider url={"https://picsum.photos/v2/list"} limit={"4"} page={'1'}/>
+      {/* <ImageSlider url={"https://picsum.photos/v2/list"} limit={"4"} page={'1'}/> */}
+      {/* LoadMoreData */}
+      <LoadMore />
     </div>
   );
 }
