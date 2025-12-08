@@ -7,6 +7,9 @@ import ImageSlider from './components/image-slider';
 import LoadMore from './components/load-more-data';
 import TreeView from './components/tree-view';
 import menus from './components/tree-view/data';
+import QrCodeGenerator from './components/qr-code-generator';
+import LightDarkTheme from './components/dark-theme';
+import ScrollIndicator from './components/scroll-indicator';
 
 function App() {
   return (
@@ -23,7 +26,13 @@ function App() {
       {/* LoadMoreData */}
       {/* <LoadMore /> */}
       {/* Tree view */}
-      <TreeView menus={menus} />
+      {/* <TreeView menus={menus} /> */}
+      {/* QR Code Generator */}
+      {/* <QrCodeGenerator /> */}
+      {/* Light / Dark Theme */}
+      {/* <LightDarkTheme /> */}
+      {/* Scroll Indicator */}
+      <ScrollIndicator url={"https://dummyjson.com/products?limit=100"}/>
     </div>
   );
 }
