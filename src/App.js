@@ -12,6 +12,7 @@ import LightDarkTheme from "./components/dark-theme";
 import ScrollIndicator from "./components/scroll-indicator";
 import Test from "./custom-tabs/test-tabs";
 import ModalTest from "./components/custom modal/modal-test";
+import GithubFinder from "./components/github-finder";
 
 function App() {
   return (
@@ -38,7 +39,9 @@ function App() {
       {/* Tabs Component */}
       {/* <Test /> */}
       {/* Custom Modal Test */}
-      <ModalTest />
+      {/* <ModalTest /> */}
+      {/* Github user finder */}
+      <GithubFinder />
     </div>
   );
 }
